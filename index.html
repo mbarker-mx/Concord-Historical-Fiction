@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Historical Fiction With Ken Risley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF6F0; --paper-2:#F2ECE3; --ink:#111111; --ink-soft:#4A4A4A;
+  --crimson:#A6192E; --rule:#A6192E; --rule-soft:#D9D2C7; --link:#1D4E89;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#181C24; --paper-2:#20252F; --ink:#E6E9EE; --ink-soft:#A9B2C1;
+    --crimson:#E0505E; --rule:#E0505E; --rule-soft:#3B4453; --link:#8FB4E6;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#181C24; --paper-2:#20252F; --ink:#E6E9EE; --ink-soft:#A9B2C1;
+  --crimson:#E0505E; --rule:#E0505E; --rule-soft:#3B4453; --link:#8FB4E6;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Newsreader",Georgia,"Times New Roman",serif;
+  font-size:1.125rem; line-height:1.6;
+  font-feature-settings:"onum","pnum";
+}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--rule);outline-offset:3px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+
+/* Header */
+header{padding:3.5rem 0 2.5rem;border-bottom:2px solid var(--rule)}
+header h1{
+  color:var(--ink);font-weight:400;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.05;
+  letter-spacing:-.01em;margin:0 0 1rem;max-width:20ch
+}
+header p{max-width:58ch;margin:0;color:var(--ink-soft);font-size:1.2rem}
+
+/* Ledger table */
+.ledger{margin:0;padding:0;list-style:none}
+.entry{
+  display:grid;gap:0 2rem;
+  grid-template-columns:minmax(0,1fr) 17rem;
+  padding:2.25rem 0;border-bottom:1px solid var(--rule-soft);
+}
+.entry:last-child{border-bottom:2px solid var(--rule)}
+.entry h2{color:var(--ink);font-weight:500;font-size:1.75rem;line-height:1.2;margin:0 0 .35rem;max-width:30ch}
+.entry .date{font-style:italic;color:var(--ink-soft);margin:0 0 1rem;font-size:1.05rem}
+.entry p{margin:0 0 .9rem;max-width:62ch}
+.entry p:last-child{margin-bottom:0}
+.aside{
+  border-left:1px solid var(--rule);padding-left:1.5rem;
+  font-size:1rem;line-height:1.5;
+}
+.aside dl{margin:0}
+.aside dt{color:var(--ink-soft);font-style:italic}
+.aside dd{margin:0 0 .9rem}
+.aside ul{margin:0;padding:0;list-style:none}
+.aside li{margin:0 0 .5rem}
+.aside .todo{color:var(--ink-soft);font-style:italic}
+.aside a{text-decoration:underline;text-underline-offset:.15em}
+
+/* Tabs */
+.tabs{display:flex;gap:2rem;border-bottom:1px solid var(--rule-soft);margin:0 0 .5rem}
+.tabs button{
+  background:none;border:0;padding:1rem 0 .8rem;margin-bottom:-1px;
+  font:inherit;font-size:1.15rem;color:var(--crimson);opacity:.7;cursor:pointer;
+  border-bottom:2px solid transparent;
+}
+.tabs button:hover{opacity:1}
+.tabs button[aria-selected="true"]{opacity:1;font-weight:600;border-bottom-color:var(--crimson)}
+[hidden]{display:none !important}
+.people-note{max-width:62ch;color:var(--ink-soft);font-size:1.05rem;margin:1.5rem 0 .5rem}
+.person{padding:1.75rem 0;border-bottom:1px solid var(--rule-soft);max-width:66ch}
+.person:last-child{border-bottom:2px solid var(--rule)}
+.person h2{color:var(--ink);font-weight:500;font-size:1.45rem;line-height:1.25;margin:0}
+.person .role{font-style:italic;color:var(--ink-soft);margin:.15rem 0 .75rem;font-size:1.05rem}
+.person p{margin:0 0 .6rem}
+.person .appears{font-size:.98rem;color:var(--ink-soft);margin:0}
+
+footer{padding:2rem 0 3.5rem;color:var(--ink-soft);font-size:1rem;max-width:62ch}
+footer p{margin:0 0 .7rem}
+
+@media (max-width:44rem){
+  .entry{grid-template-columns:1fr;gap:1.5rem 0}
+  .aside{border-left:0;border-top:1px solid var(--rule);padding:1.25rem 0 0}
+  header{padding-top:2.5rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  a{transition:color .15s}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Historical Fiction With Ken Risley</h1>
+  <p>A short guide to digitized documents worth a close look: what each one is, why it matters, and where to find the original record. The documents themselves live with the archives that hold them; this page only points the way.</p>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" id="tab-documents" aria-selected="true" aria-controls="panel-documents">Documents</button>
+  <button role="tab" id="tab-people" aria-selected="false" aria-controls="panel-people">People</button>
+  <button role="tab" id="tab-books" aria-selected="false" aria-controls="panel-books">Books</button>
+  <button role="tab" id="tab-maps" aria-selected="false" aria-controls="panel-maps">Maps</button>
+</nav>
+
+<main>
+  <section id="panel-documents" role="tabpanel" aria-labelledby="tab-documents">
+    <ol class="ledger" id="ledger"></ol>
+  </section>
+  <section id="panel-people" role="tabpanel" aria-labelledby="tab-people" hidden>
+    <p class="people-note">Short notes on Concord people who turn up in the documents. They draw chiefly on Robert A. Gross, <em>The Minutemen and Their World</em> (1976; anniversary edition 2001), on Elise Lemire, <em>Black Walden: Slavery and Its Aftermath in Concord, Massachusetts</em> (2009), and on the town records linked under Documents. The wording here is our own summary; for the full stories, and the arguments the two books build from them, go to the books.</p>
+    <ol class="ledger" id="people"></ol>
+  </section>
+  <section id="panel-books" role="tabpanel" aria-labelledby="tab-books" hidden>
+    <p class="people-note">Books behind this site: the studies the People tab draws on, reference works for looking up individuals, and the older town histories. Where a book is out of copyright and scanned, the link goes to the free full text.</p>
+    <ol class="ledger" id="books"></ol>
+  </section>
+  <section id="panel-maps" role="tabpanel" aria-labelledby="tab-maps" hidden>
+    <p class="people-note">Ways to put the documents and people on the ground. The Town of Concord\u2019s own GIS viewer is the starting point: it layers historic maps and aerial photographs under today\u2019s parcels, and links surveyed properties to their historical research forms.</p>
+    <ol class="ledger" id="maps"></ol>
+  </section>
+</main>
+
+<footer>
+  <p>Images and records remain the property of the holding institutions. Follow each archive's own terms of use when quoting or reproducing them.</p>
+  <p>To add a document, edit the <code>resources</code> list in this page's source.</p>
+</footer>
+</div>
+
+<script>
+const resources = [
+  {
+    title: "Assessors' valuation list, \u201cSouth\u201d district of Concord, Massachusetts",
+    date: "1775",
+    type: "Manuscript tax valuation (ledger page)",
+    institution: "Town of Concord Archives, Concord, Massachusetts",
+    summary: "A page from the assessors\u2019 book for the year of the Concord Fight. Each head of household is listed alphabetically with counts of polls, buildings, livestock and acreage, followed by the assessed value of real and personal estate in pounds and shillings. The pencil note \u201cSouth 1775\u201d was added later by an archivist.",
+    why: "The names include Col. James Barrett, who commanded the militia at the North Bridge on April 19, 1775, along with Deacon Thomas Barrett, Capt. Jonathan Brooks and several Bond and Allen households. Read alongside the 1771 province-wide valuation, it shows the relative wealth of Concord\u2019s Revolutionary leaders on the eve of war. The Town Archives is conserving and digitizing its 18th-century assessors\u2019 records under a 2025 Community Preservation Act grant.",
+    links: [
+      { label: "Town of Concord Archives", url: "https://concordlibrary.org/special-collections/town-of-concord-archives" },
+      { label: "Town of Concord Archives digital repository", url: "https://concordmassarchives.starter1ua.preservica.com" },
+      { label: "Revolutionary-era Concord town records (PDF scans)", url: "https://concordlibrary.org/special-collections/revolutionary-era-concord-town-records/content" }
+    ],
+    todo: "Direct link to the catalog record: to be added"
+  },
+  {
+    title: "The Retreat from Concord, 1775",
+    date: "Slide made late 1910s\u20131920s, depicting April 19, 1775",
+    type: "Glass lantern slide, 4 \u00d7 5 in.; black-and-white ink drawing",
+    institution: "Palisades Interstate Park Commission Archives, Bear Mountain, New York",
+    summary: "A projection slide showing British troops retreating along the road from Concord while colonists fire from the rocks above; one soldier reels backward, another sits wounded on the ground. It is slide 11 of \u201cSet 48: The Story of the Revolution,\u201d a lecture series of hand-tinted glass slides that the American Museum of Natural History produced for the Park Commission\u2019s education programs. Lantern slides were the projected slideshow of their day, shown with a spoken script.",
+    why: "This is not a 1775 document but a 20th-century picture of 1775 \u2014 useful for asking how the Revolution was taught and imagined a century and a half later, and for comparing an educator\u2019s dramatized scene with contemporary records such as Concord\u2019s own 1775 assessors\u2019 list. The slide is in the public domain in the United States; the Commission asks to be credited and can supply higher-resolution copies.",
+    links: [
+      { label: "Catalog record and image", url: "https://cdm16694.contentdm.oclc.org/digital/collection/pipc/id/7" },
+      { label: "Lantern Slides collection on New York Heritage", url: "https://nyheritage.org/collections/lantern-slides-palisades-interstate-park-commission" }
+    ],
+    todo: ""
+  },
+  {
+    title: "Concord town records, 1774\u20131779",
+    date: "January 1774 to January 1779, in five yearly files",
+    type: "Typed transcription of the town clerk\u2019s minutes (Town Records vols. 4\u20135), scanned as PDFs",
+    institution: "Concord Free Public Library, William Munroe Special Collections",
+    summary: "The selectmen\u2019s warrants, town-meeting votes and treasurer\u2019s payments for the Revolutionary years, copied out in a clear hand onto indexed research cards from the original clerk\u2019s books. They begin in January 1774 with the town refusing to buy or drink East India tea and declaring anyone who did \u201cunfriendly and enemical to the happy constitution of this country,\u201d and run through the votes that raised minute companies, bought powder, lead and \u201ca chest of good fire arms,\u201d and mounted the town\u2019s cannon in the autumn of 1774.",
+    why: "This is the town governing itself week by week as the crisis deepened: Capt. James Barrett sent to the Provincial Congress, the whole town resolved into a Committee of Safety, a non-consumption covenant signed by nearly three hundred men in June 1774. The 1777 file shows the cost of war at home \u2014 payments for guns lent \u201cin the year 1775,\u201d for boarding soldiers\u2019 families, and \u00a3200 borrowed \u201cto hire men in the Continental service.\u201d Because the text is typed, students can read it without paleography training, and the money columns pair directly with the assessors\u2019 list above.",
+    links: [
+      { label: "1774 (Jan. 4 \u2013 Dec. 27)", url: "https://concordlibrary.org/uploads/scollect/doc/1774.pdf" },
+      { label: "1775 (Jan. 2 \u2013 Dec. 29)", url: "https://concordlibrary.org/uploads/scollect/doc/1775.pdf" },
+      { label: "1776 (Jan. 1, 1776 \u2013 Jan. 7, 1777)", url: "https://concordlibrary.org/uploads/scollect/doc/1776.pdf" },
+      { label: "1777 (Jan. 7 \u2013 Dec. 1)", url: "https://concordlibrary.org/uploads/scollect/doc/1777.pdf" },
+      { label: "1778 (Jan. 7, 1778 \u2013 Jan. 5, 1779)", url: "https://concordlibrary.org/uploads/scollect/doc/1778.pdf" },
+      { label: "Collection page at the Concord Free Public Library", url: "https://concordlibrary.org/special-collections/revolutionary-era-concord-town-records/content" }
+    ],
+    todo: ""
+  },
+  {
+    title: "Captain of the Minute Men, or, The Concord Boys of 1775",
+    date: "Published 1890",
+    type: "Boys\u2019 adventure novel, 221 pages with plates; Boys of Liberty Library, vol. 16 (Philadelphia: David McKay)",
+    institution: "University of South Florida Libraries, Children\u2019s Literature Collection (digitized copy)",
+    summary: "A juvenile novel that puts a company of Concord boys at the center of the events of April 19, 1775. The digitized copy includes the publisher\u2019s advertisements at the back, a glimpse of what else was being sold to young readers alongside it.",
+    why: "Like the lantern slide, this is not evidence of 1775 but evidence of how 1775 was retold \u2014 here as a story of youthful courage for boys a century and more later. Set beside the town records, it invites the question of what the novel keeps, drops and invents. The scan is in the public domain in the United States.",
+    links: [
+      { label: "Full text (PDF) at USF Digital Commons", url: "https://digitalcommons.usf.edu/childrens_lit_books/21" },
+      { label: "Catalog record, American Revolution Institute library", url: "https://collections.americanrevolutioninstitute.org/record/6841" }
+    ],
+    todo: ""
+  },
+  {
+    title: "1775. Lexington and Concord, 1875",
+    date: "1875",
+    type: "Illustrated magazine article, quarto; no. 1 of the \u201cCentennial Memoirs\u201d in Potter\u2019s American Monthly, vol. 4, pp. 250\u2013256 (Philadelphia: J. E. Potter & Co.)",
+    institution: "Harvard University copy, digitized in HathiTrust",
+    summary: "A popular magazine\u2019s account of Lexington and Concord written for the hundredth anniversary of the fight, opening a series of \u201cCentennial Memoirs\u201d that Potter\u2019s American Monthly ran through the 1875\u201376 centennial season. Illustrated.",
+    why: "The centennial of April 19, 1875 \u2014 the year Daniel Chester French\u2019s Minute Man was unveiled at the North Bridge \u2014 fixed much of the popular imagery of Concord that the 1890 boys\u2019 novel and the 1920s lantern slide later drew on. This article is a sample of what a national readership was told at that moment, and a useful middle point between the 1770s records and the 20th-century retellings.",
+    links: [
+      { label: "Read the full text in HathiTrust", url: "https://babel.hathitrust.org/cgi/pt?id=hvd.hx4l7v" },
+      { label: "HathiTrust catalog record", url: "https://catalog.hathitrust.org/Record/100555465" }
+    ],
+    todo: ""
+  }
+];
+
+const ledger = document.getElementById("ledger");
+for (const r of resources) {
+  const li = document.createElement("li");
+  li.className = "entry";
+  const links = r.links.map(l => `<li><a href="${l.url}" target="_blank" rel="noopener">${l.label}</a></li>`).join("");
+  li.innerHTML = `
+    <div>
+      <h2>${r.title}</h2>
+      <p class="date">${r.date}</p>
+      <p>${r.summary}</p>
+      <p>${r.why}</p>
+    </div>
+    <aside class="aside">
+      <dl>
+        <dt>Held by</dt><dd>${r.institution}</dd>
+        <dt>Type</dt><dd>${r.type}</dd>
+        <dt>Find it</dt>
+        <dd><ul>${links}</ul>${r.todo ? `<p class="todo">${r.todo}</p>` : ""}</dd>
+      </dl>
+    </aside>`;
+  ledger.appendChild(li);
+}
+
+const people = [
+  {
+    name: "James Barrett",
+    dates: "1710\u20131779",
+    role: "Colonel of the Middlesex militia; Concord\u2019s representative",
+    bio: "The wealthiest farmer in the north part of town and, by 1775, its most important public man. Concord sent him to the General Court and to the Provincial Congress, and the Congress in turn made his farm the storehouse for provincial cannon, powder and provisions \u2014 the target of the British march on April 19. Barrett, then in his mid-sixties, commanded the militia that gathered on the ridge above town that morning and ordered his men not to fire unless fired upon. Gross uses the Barretts to show how a few established families dominated Concord\u2019s offices for decades.",
+    appears: "Assessors\u2019 list (Col. James Barrett); town records 1774 (chosen representative, Committee of Correspondence, Committee of Inspection)."
+  },
+  {
+    name: "Thomas Barrett",
+    dates: "d. 1779",
+    role: "Deacon; Col. James Barrett\u2019s older brother",
+    bio: "A deacon of the church and a steady presence on town committees, including the 1774 committee on the schools. His household carries the largest total on the surviving assessors\u2019 page, a reminder that the Barretts\u2019 political weight rested on land and livestock.",
+    appears: "Assessors\u2019 list (Dn. Thomas Barrett, top line); town records 1774 and 1777."
+  },
+  {
+    name: "William Emerson",
+    dates: "1743\u20131776",
+    role: "Minister of Concord from 1766",
+    bio: "Young, Harvard-trained and unusually political for a New England pastor, Emerson preached resistance from the pulpit and stood with the militia on the morning of April 19; the manse he built overlooks the North Bridge. He went as a chaplain with the army to Fort Ticonderoga in 1776 and died of camp fever on the way home that October. Gross treats him as the voice that turned Concord\u2019s local quarrels into a shared moral cause. His grandson was Ralph Waldo Emerson.",
+    appears: "Town records 1774 (a vote on aid for \u201cthe Rev. Mr. Emerson under his present difficult circumstances\u201d) and 1777 (payments of his salary and a \u00a350 grant to his widow; a committee on \u201cthe charges of Mr. Emerson\u2019s sickness\u201d)."
+  },
+  {
+    name: "Phebe Bliss Emerson",
+    dates: "1741\u20131825",
+    role: "Daughter of the previous minister; Emerson\u2019s widow",
+    bio: "Daughter of the Rev. Daniel Bliss and sister of the loyalist Daniel Bliss Jr., she married William Emerson in 1766 and was left with five children when he died. The town continued his salary to the day of his death and voted her a further \u00a350 in 1777. She later married his successor, Ezra Ripley, and lived at the Old Manse into the 1820s.",
+    appears: "Town records 1777 (payments to \u201cMrs. Phebe Emerson\u201d)."
+  },
+  {
+    name: "John Buttrick",
+    dates: "1731\u20131791",
+    role: "Major of minute men at the North Bridge; later colonel",
+    bio: "A farmer whose land ran down to the bridge, Buttrick led the column that advanced on the British light infantry on April 19 and, when the regulars fired, gave the order to return fire \u2014 the first American command to shoot at the King\u2019s troops. He held a string of town offices before and after the war. In 1777 the town chose him to collect evidence against suspected enemies of the United States under a new state law.",
+    appears: "Town records 1774 (fence viewer) and 1777 (Col. John Buttrick, committees on subscriptions and on the pulpit)."
+  },
+  {
+    name: "David Brown",
+    dates: "1732\u20131802",
+    role: "Captain of a Concord minute company",
+    bio: "Brown farmed on the west side of the river, next to the bridge, and marched his company across his own fields to meet the British while his family watched from the house. Selectman before the war and a member of the 1774 Committee of Inspection that enforced the boycott of British goods.",
+    appears: "Town records 1774 (Committee of Inspection, field driver) and 1777 (Capt. David Brown, pulpit committee)."
+  },
+  {
+    name: "John Cuming",
+    dates: "1728\u20131788",
+    role: "Physician, colonel, town moderator",
+    bio: "Concord\u2019s leading doctor and one of its richest men, Cuming had been wounded and taken captive in the French and Indian War before settling into a long career as the town\u2019s preferred moderator \u2014 he chairs most of the meetings recorded in 1774 and 1777. A Harvard graduate and later a benefactor of its medical school, he represents for Gross the educated gentry who steered the town through the crisis without themselves fighting at the bridge. He was also the town\u2019s largest slaveholder: Brister Freeman (below) spent some twenty-five years enslaved on his estate.",
+    appears: "Town records 1774 and 1777 (moderator; committees on the meeting house and on instructions to the representative)."
+  },
+  {
+    name: "Ephraim Wood Jr.",
+    dates: "1733\u20131814",
+    role: "Town clerk and selectman",
+    bio: "A shoemaker and farmer of modest origins who rose through the town offices to become clerk, selectman and, after the war, a judge. Wood\u2019s hand recorded nearly everything Concord did in these years: the tea resolves, the non-consumption covenant, the votes for arms and powder. He also served on the Committee of Correspondence and later on the committee charged with enforcing the state\u2019s price-control (\u201cmonopoly\u201d) act. Gross reads his career as evidence that the Revolution opened the town\u2019s leadership to new men.",
+    appears: "Signs almost every page of the 1774 records; 1777 records (Ephraim Wood Esq., several committees)."
+  },
+  {
+    name: "Joseph Hosmer",
+    dates: "1736\u20131821",
+    role: "Lieutenant and adjutant at the North Bridge; later sheriff of Middlesex",
+    bio: "A farmer and cabinetmaker from the south part of town who had already made his name debating the loyalist lawyer Daniel Bliss in town meeting. At the bridge, seeing smoke rise from the village, he is remembered for demanding of the officers whether they would let the town burn. Chosen Concord\u2019s representative to the General Court in 1777.",
+    appears: "Town records 1774 (Committee of Correspondence) and 1777 (elected representative; payments for beef for the poor)."
+  },
+  {
+    name: "Jonas Heywood",
+    dates: "",
+    role: "Selectman, moderator, justice",
+    bio: "One of the small group of men who ran Concord\u2019s affairs in the 1770s: moderator of the June 1774 meeting that adopted the covenant, member of the Committee of Correspondence, and named again and again to committees on schools, the meeting house and the river fishery.",
+    appears: "Town records 1774 and 1777 (Capt. / Esq. Jonas Heywood)."
+  },
+  {
+    name: "Abijah Bond",
+    dates: "",
+    role: "Town treasurer",
+    bio: "Every payment in the town records for these years runs \u201cby an order to Mr. Abijah Bond, Town Treasurer\u201d \u2014 school money, highway work, guns lent in 1775, care of the poor. He also sat on the 1774 Committee of Inspection. Two Bond households appear together on the assessors\u2019 page.",
+    appears: "Assessors\u2019 list (Abijah Bond, Abijah Bond Jr., Joshua Bond); town records 1774\u20131777 throughout."
+  },
+  {
+    name: "Samuel Whitney",
+    dates: "",
+    role: "Muster master for the provincial stores; moderator",
+    bio: "A merchant who moderated the September 1774 meeting that raised minute companies and bought powder, and who went with Barrett and Wood to the Provincial Congress at Concord that October. The 1777 records settle his account for service \u201cas a delegate at Provincial Congress.\u201d Whitney held a man named Casey in slavery; Casey\u2019s escape on April 19 is told below.",
+    appears: "Town records 1774 (moderator, Committee of Correspondence) and 1777."
+  },
+  {
+    name: "Daniel Bliss",
+    dates: "1740\u20131806",
+    role: "Lawyer and loyalist",
+    bio: "Son of Concord\u2019s former minister and brother-in-law of William Emerson, Bliss was the town\u2019s only lawyer and its most outspoken defender of royal government. In March 1775 he hosted two British officers sent to spy out the roads and the stores at Barrett\u2019s farm; threatened by his neighbors, he left with them for Boston and never returned, later serving the Crown and settling in New Brunswick. Gross uses the Bliss\u2013Emerson family to show how the Revolution divided even the parsonage.",
+    appears: "Town records 1774 (Daniel Bliss Esq., committee on seating the meeting house)."
+  },
+  {
+    name: "Joseph Lee",
+    dates: "1716\u20131797",
+    role: "Physician and suspected loyalist",
+    bio: "A doctor whose disputed call to the ministry had split the church in the 1750s and 60s, leaving lasting factions in town. When war came he was accused of aiding the British and confined to his farm. For Gross, the Lee affair is the key example of how Concord\u2019s pre-war quarrels shaped who became a patriot and who a Tory.",
+    appears: "Not named in the linked documents; background to the church and school disputes recorded in 1774."
+  },
+  {
+    name: "Duncan Ingraham",
+    dates: "",
+    role: "Retired sea captain and merchant",
+    bio: "A wealthy newcomer with fine tastes and Tory sympathies, Ingraham was mobbed by young men in 1775 but chose to stay in Concord and keep his head down. In 1774 he led the petition asking the town to give the singers a gallery in the meeting house \u2014 a request the town refused. He held Cato Ingraham (below) in slavery.",
+    appears: "Town records 1774 (Duncan Ingraham Esq., petition on the singers\u2019 gallery)."
+  },
+  {
+    name: "Samuel Prescott",
+    dates: "1751\u2013c. 1777",
+    role: "Young doctor; the rider who reached Concord",
+    bio: "Returning late from courting in Lexington on the night of April 18, Prescott fell in with Paul Revere and William Dawes; when a British patrol stopped them he jumped his horse over a wall and carried the alarm to Concord. He later served as a surgeon, was captured at sea and is believed to have died in prison at Halifax.",
+    appears: "Not named in the linked documents; his father Dr. Abel Prescott appears in the 1777 payments."
+  },
+  {
+    name: "Reuben Brown",
+    dates: "1747\u20131832",
+    role: "Saddler and harness maker",
+    bio: "Sent down the road to Lexington at dawn on April 19 to find out what was happening, Brown watched the first volley on the green and rode back to report that the regulars were firing ball. His shop on the main street was one of the places the British searched. Admitted with his family as inhabitants of the town by vote in 1777.",
+    appears: "Town records 1774 (sealer of leather) and 1777 (vote to admit \u201cMr. Reuben Brown and family\u201d)."
+  },
+  {
+    name: "Ezekiel Brown",
+    dates: "1744\u2013after 1800",
+    role: "Failed shopkeeper turned army surgeon and schoolmaster",
+    bio: "Brown opened a store on credit, went bankrupt and spent years in the county jail for debt, teaching himself medicine from books while inside. Released during the war, he served as a surgeon\u2019s mate in the Continental Army and kept the school in the center of town. Gross follows him as an example of the debt and land pressure squeezing Concord\u2019s younger men before the Revolution.",
+    appears: "Town records 1777 (paid for \u201ckeeping school in the middle of the town\u201d)."
+  },
+  {
+    name: "Timothy Wheeler",
+    dates: "",
+    role: "Miller",
+    bio: "Remembered for saving a large store of provincial flour on April 19 by telling the British officers, truthfully, that some of it was his own and letting them assume the rest was too. He had refused reelection as selectman in March 1774 and was thanked by the town for past service.",
+    appears: "Town records 1774 (Capt. Timothy Wheeler, Committee to answer Boston; declines as selectman)."
+  }
+];
+
+const peopleWalden = [
+  {
+    name: "Brister Freeman",
+    dates: "1744\u20131822",
+    role: "Enslaved on John Cuming\u2019s estate; Revolutionary soldier; landowner in Walden Woods",
+    bio: "Born in Concord to enslaved parents and given as a boy to Dr. John Cuming as a wedding present, Brister ran the Cuming farm for a quarter century. He served three enlistments in the Revolutionary army and by 1779 was signing himself Freeman. In 1785 he and another Black veteran, Charlestown Edes, bought just over an acre of poor soil near Walden Pond, where he lived with his wife Fenda and three children at the heart of what Thoreau later called a \u201csmall village\u201d of formerly enslaved people. Lemire makes him the central figure of the book: harassed by white neighbors, never able to make a living from the land, yet never dislodged. Brister\u2019s Hill and Brister\u2019s Spring at Walden still carry his name.",
+    appears: "Not named in the linked documents; his enslaver John Cuming moderates most of the 1774 and 1777 meetings."
+  },
+  {
+    name: "Zilpah White",
+    dates: "d. 1820",
+    role: "Brister Freeman\u2019s older sister; spinner in Walden Woods",
+    bio: "Enslaved as a child with her brother on the Russell family\u2019s Concord estate and left to fend for herself when freed, Zilpah built a one-room house by the Walden road and lived there alone for some forty years, spinning linen, keeping hens and a garden, and probably bartering with travelers. Neighbors called her a witch; Thoreau recorded that British soldiers on parole burned her house during the War of 1812. Lemire treats her survival as a quieter kind of heroism than her brother\u2019s.",
+    appears: "Not named in the linked documents."
+  },
+  {
+    name: "Fenda Freeman",
+    dates: "",
+    role: "Brister Freeman\u2019s wife",
+    bio: "Remembered in Concord as a fortune-teller, Fenda raised three children in the shared two-room house in Walden Woods. Fortune-telling, spinning, basket-making and taking in boarders were how the Walden households pieced together a living from land no one else wanted.",
+    appears: "Not named in the linked documents."
+  },
+  {
+    name: "Cato Ingraham",
+    dates: "d. c. 1805",
+    role: "Enslaved by Duncan Ingraham; householder in Walden Woods",
+    bio: "When Duncan Ingraham prepared to leave Concord in the 1790s, Cato asked to stay behind to marry Phyllis, a woman who had been enslaved in the Bliss\u2013Emerson household. His former master agreed only on condition that Cato ask nothing further of him, and set him up in a house at the edge of Walden Woods. Cato took in boarders to get by and, by Thoreau\u2019s account, died in want. His house site is marked near the pond.",
+    appears: "Not named in the linked documents; Duncan Ingraham appears in the 1774 records."
+  },
+  {
+    name: "Casey (Case Feen)",
+    dates: "",
+    role: "Enslaved by Samuel Whitney; escaped to the army on April 19, 1775",
+    bio: "Casey was held by Samuel Whitney, the muster master who guarded the provincial stores. On the morning the British marched into Concord he ran from the Whitney farm, eventually joining the American army, and afterward lived free under the name Case Feen. Lemire uses his story to show how enslaved people in Concord seized the opening the war created, sometimes literally in the middle of the fighting.",
+    appears: "Not named in the linked documents; Samuel Whitney moderates the September 1774 meeting."
+  },
+  {
+    name: "John Jack",
+    dates: "d. 1773",
+    role: "Formerly enslaved shoemaker and farmer",
+    bio: "Enslaved by a Concord shoemaker, Jack bought his freedom, acquired a few acres and died in 1773. The loyalist lawyer Daniel Bliss wrote his epitaph, which turns the patriots\u2019 language of liberty back on them by observing that a man born in a land of slavery had died free in a land of liberty. The stone still stands in the Old Hill Burying Ground and was copied and reprinted on both sides of the Atlantic during the Revolution.",
+    appears: "Not named in the linked documents; Daniel Bliss appears in the 1774 records."
+  },
+  {
+    name: "Caesar Robbins",
+    dates: "c. 1745\u20131822",
+    role: "Enslaved in Concord; Revolutionary soldier; farmer at Great Meadows",
+    bio: "Robbins served in the war and afterward settled on the edge of the Great Meadows on the north side of town, where his family farmed for two generations. His descendants\u2019 house, moved and restored as the Robbins House, now stands opposite the North Bridge as Concord\u2019s memorial to its Black families; the Freemans of Walden and the Robbinses were later joined by marriage.",
+    appears: "Not named in the linked documents."
+  },
+  {
+    name: "An unnamed man enslaved by Capt. George Minot",
+    dates: "",
+    role: "In \u201cthe publick service,\u201d 1776",
+    bio: "The 1777 payments include fourteen shillings to Capt. George Minot for \u201chis Negro\u2019s rate remitted last year, he being in the publick service\u201d \u2014 the town forgiving a poll tax because the man was away with the army. Lemire lists Minot among Concord\u2019s slaveholders. The entry is a small, direct trace in the town\u2019s own books of an enslaved Concord man serving in the Revolution.",
+    appears: "Town records 1777 (payment to Capt. George Minot, October 31)."
+  }
+];
+
+const peopleList = document.getElementById("people");
+for (const p of people) {
+  const li = document.createElement("li");
+  li.className = "person";
+  li.innerHTML = `
+    <h2>${p.name}${p.dates ? ` <span style="font-weight:400;color:var(--ink-soft)">(${p.dates})</span>` : ""}</h2>
+    <p class="role">${p.role}</p>
+    <p>${p.bio}</p>
+    <p class="appears">Appears in: ${p.appears}</p>`;
+  peopleList.appendChild(li);
+}
+const waldenHead = document.createElement("li");
+waldenHead.style.cssText = "padding:2.5rem 0 .5rem;list-style:none";
+waldenHead.innerHTML = '<h2 style="font-weight:500;font-size:1.6rem;margin:0 0 .4rem">Enslaved and free Black Concordians</h2><p class="people-note" style="margin:0">From Elise Lemire\u2019s <em>Black Walden</em>. About fifteen formerly enslaved people made homes in Walden Woods after the Revolution; several of them had been held by the men profiled above.</p>';
+peopleList.appendChild(waldenHead);
+for (const p of peopleWalden) {
+  const li = document.createElement("li");
+  li.className = "person";
+  li.innerHTML = `
+    <h2>${p.name}${p.dates ? ` <span style="font-weight:400;color:var(--ink-soft)">(${p.dates})</span>` : ""}</h2>
+    <p class="role">${p.role}</p>
+    <p>${p.bio}</p>
+    <p class="appears">Appears in: ${p.appears}</p>`;
+  peopleList.appendChild(li);
+}
+
+const books = [
+  {
+    author: "Robert A. Gross",
+    title: "The Minutemen and Their World",
+    pub: "New York: Hill and Wang, 1976; 25th-anniversary edition 2001; revised and expanded edition 2022",
+    note: "The social history of Revolutionary Concord and the main source for the People tab. Gross reconstructs the town from its own records \u2014 tax lists like the 1775 assessors\u2019 page, town-meeting minutes, church disputes, probate \u2014 to show who the minute men were, what they owed and owned, and why they fought. Winner of the Bancroft Prize.",
+    links: []
+  },
+  {
+    author: "Elise Lemire",
+    title: "Black Walden: Slavery and Its Aftermath in Concord, Massachusetts",
+    pub: "Philadelphia: University of Pennsylvania Press, 2009",
+    note: "Recovers the enslaved and formerly enslaved people of Concord \u2014 Brister Freeman, Zilpah White, Cato Ingraham and their neighbors in Walden Woods \u2014 and the families that held them, including John Cuming and Duncan Ingraham. Source for the second half of the People tab; the \u201cDramatis Personae\u201d appendix is a handy checklist.",
+    links: [{ label: "Publisher\u2019s page", url: "https://www.pennpress.org/9780812224436/black-walden/" }]
+  },
+  {
+    author: "Brian Donahue",
+    title: "The Great Meadow: Farmers and the Land in Colonial Concord",
+    pub: "New Haven: Yale University Press, 2004 (Yale Agrarian Studies)",
+    note: "How colonial Concord actually worked, season by season: the plowlands, the hay meadows along the river that gave the town its wealth, the wood lots, the cattle and the careful passing of land from one generation to the next. Donahue reconstructs several farm neighborhoods over four generations, using deeds, probate and tax records mapped with GIS, and argues that Concord\u2019s farmers ran a sustainable system until the nineteenth century upset it. The material world behind the 1775 assessors\u2019 page \u2014 its acres, oxen and cows. Winner of the George Perkins Marsh Prize in environmental history and the Saloutos Prize in agricultural history.",
+    links: []
+  },
+  {
+    author: "L. Edward Purcell",
+    title: "Who Was Who in the American Revolution",
+    pub: "New York: Facts on File, 1993",
+    note: "A single-volume biographical dictionary of some 1,500 figures on both sides of the war \u2014 officers, politicians, loyalists, diplomats. Useful for placing the Concord men who went on to wider service, and for checking dates and ranks quickly.",
+    links: []
+  },
+  {
+    author: "Bernard Bailyn",
+    title: "Faces of Revolution: Personalities and Themes in the Struggle for American Independence",
+    pub: "New York: Alfred A. Knopf, 1990",
+    note: "Essays by the Harvard historian of Revolutionary ideology, pairing portraits of individuals (John Adams, Thomas Hutchinson, Thomas Paine, Jefferson and others) with essays on the ideas that moved them. A good companion for the question this site keeps asking: how the same events looked from different sides.",
+    links: []
+  },
+  {
+    author: "Jim Sherblom",
+    title: "Stories of Concord, Massachusetts, Volume I",
+    pub: "Capsule, 2025 (Volume II, covering 1775 to the present, 2026)",
+    note: "A recent narrative history by a Concord resident and retired minister, told through the people who lived there \u2014 Indigenous inhabitants, settlers, slave traders, immigrants and revolutionaries \u2014 from the town\u2019s founding to the eve of the Revolution.",
+    links: []
+  },
+  {
+    author: "Alfred Sereno Hudson",
+    title: "The History of Concord, Massachusetts. Vol. I: Colonial Concord",
+    pub: "Concord: Erudite Press, 1904 (no further volumes published)",
+    note: "Written as a walking tour: Hudson visits sites around the town and supplies the history of each, with sketches of the original grantees and early families. The main period is 1635\u20131692, but it reaches forward to the Revolution and to the town\u2019s literary era, and has a full index. Out of copyright and scanned.",
+    links: [{ label: "Read free at the Internet Archive", url: "https://archive.org/details/historyofconcord01huds/page/n5/mode/2up" }]
+  },
+  {
+    author: "Lemuel Shattuck",
+    title: "A History of the Town of Concord, Middlesex County, Massachusetts, from Its Earliest Settlement to 1832",
+    pub: "Boston: Russell, Odiorne, 1835",
+    note: "The first full history of the town, written for its bicentennial and still the starting point for Concord genealogy and for the 1775 story as the town itself remembered it a generation later. Includes the Barretts, Buttricks, Hosmers and other families on the People tab.",
+    links: [{ label: "Full view in HathiTrust", url: "https://catalog.hathitrust.org/Record/008587270" }]
+  }
+];
+
+const booksList = document.getElementById("books");
+for (const b of books) {
+  const li = document.createElement("li");
+  li.className = "person";
+  const links = b.links.length ? `<p class="appears">${b.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(" \u00b7 ")}</p>` : "";
+  li.innerHTML = `
+    <h2>${b.author}, <em>${b.title}</em></h2>
+    <p class="role">${b.pub}</p>
+    <p>${b.note}</p>
+    ${links}`;
+  booksList.appendChild(li);
+}
+
+const maps = [
+  {
+    title: "Town of Concord interactive map (MapsOnline)",
+    who: "Concord GIS Program, Town of Concord",
+    note: "The town\u2019s public web map. Under Layers, the Base Maps group at the bottom includes historic aerial photographs alongside the current town base map; the Historic layer shows whether a property has been surveyed or lies in a historic district; and the Documents layer attaches research forms and early plans to individual parcels. Use Find to jump to a landmark or address, and Identify to read a parcel\u2019s attributes. The link opens on the town center and the North Bridge area.",
+    links: [
+      { label: "Open the map", url: "https://www.mapsonline.net/concordma/index.html#x=-7947938.257396,5228659.486781,-7941823.295134,5231673.972084" },
+      { label: "How to use the GIS maps (town guide, PDF)", url: "https://concordma.gov/220/How-To-Use-The-GIS-Maps-PDF" }
+    ]
+  },
+  {
+    title: "Historic Maps of Concord",
+    who: "Town of Concord",
+    note: "The town\u2019s gathering page for historic maps from the seventeenth century to the early twentieth, including the 1907\u20131910 Stickney parcel map with owners\u2019 names, which the Town Archives has scanned at high resolution and set up as a slider over today\u2019s parcels.",
+    links: [
+      { label: "Historic Maps page", url: "https://concordma.gov/2875/Historic-Maps" }
+    ]
+  },
+  {
+    title: "Researching historic properties in Concord",
+    who: "Planning Division, Town of Concord",
+    note: "A short guide to tracing a house or parcel back through time: the state MACRIS inventory of surveyed buildings, the GIS layers to switch on, and the historic maps and atlases that name owners. Useful for following a name from the People tab to a place on the ground.",
+    links: [
+      { label: "Research guide", url: "https://concordma.gov/3310/Researching-Historic-Properties-in-Conco" }
+    ]
+  }
+];
+
+const mapsList = document.getElementById("maps");
+for (const m of maps) {
+  const li = document.createElement("li");
+  li.className = "person";
+  li.innerHTML = `
+    <h2>${m.title}</h2>
+    <p class="role">${m.who}</p>
+    <p>${m.note}</p>
+    <p class="appears">${m.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(" \u00b7 ")}</p>`;
+  mapsList.appendChild(li);
+}
+
+// Tabs
+const tabs = document.querySelectorAll('[role="tab"]');
+function showTab(id) {
+  for (const t of tabs) {
+    const on = t.id === id;
+    t.setAttribute("aria-selected", on);
+    document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+  }
+  try { history.replaceState(null, "", "#" + id.replace("tab-", "")); } catch (e) {}
+}
+for (const t of tabs) t.addEventListener("click", () => showTab(t.id));
+if (location.hash === "#people") showTab("tab-people");
+if (location.hash === "#books") showTab("tab-books");
+if (location.hash === "#maps") showTab("tab-maps");
+</script>
+</body>
+</html>
